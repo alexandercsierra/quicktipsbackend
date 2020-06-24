@@ -29,7 +29,7 @@ router.post('/login', validateUser, (req, res)=>{
             //if user exists, and the decrypted password matches the password sent in the request, generate a token
             if(user && bcrypt.compareSync(password, user.password)){
                 const token = generateToken(user);
-                res.status(200).json({message: `Welcome ${user.username}`, token})
+                res.status(200).json({message: `Welcome ${user.username}`, id: user.id, creator: user.creator, token})
             //user does not exist or the password doesn't match
             } else {
                 res.status(401).json({message: 'invalid credentials'})
